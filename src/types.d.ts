@@ -56,3 +56,34 @@ export type ResultSuccessIframe = ResultSuccess & {
     token: string;
     url: string;
 }
+
+
+
+// TYPES FOR TASKS CALLS 
+
+export interface Item {
+    id: string;
+    user_id: string;
+    user_name: string;
+    created: string;
+    status: string;
+    duration: number;
+    name: string;
+    description: string;
+}
+
+export type Task = {
+    page: number;
+    limit: number;
+    pages_count: number;
+    items_count: number;
+    items: Array<Item>;
+}
+
+export type TaskById = Item & {
+    subtask: string;
+    progress: number;
+    result: string;
+    result_type: string;
+    error_description: string;
+}

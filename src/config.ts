@@ -1,4 +1,4 @@
-// Configuration : https://github.com/deepintdev/deepint-external-source-mongo/blob/master/src/config.ts 
+// Configuration Source : https://github.com/deepintdev/deepint-external-source-mongo/blob/master/src/config.ts 
 
 "use strict";
 

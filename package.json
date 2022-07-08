@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pre" : "tsc && node build/workspaces_calls.js ",
-    "dev": "ts-node-dev src/workspaces_calls.ts",
-    "start": "node build/workspaces_calls.js",
+    "pre" : "tsc && node build/tasks_calls.js && node build/workspaces_calls.js",
+    "dev": "ts-node-dev src/tasks_calls.ts",
+    "start": "node build/tasks_calls.js && node build/workspaces_calls.js",
     "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

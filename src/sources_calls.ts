@@ -9,7 +9,7 @@ dotenv.config(); // Load env variables
 
 // get all sources from a workspace
 // @ts-ignore
-export const getWorkspaceSources = async (idWorkspace:string,page:number=0,limit:number=500)=> {
+const getWorkspaceSources = async (idWorkspace:string,page:number=0,limit:number=500)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/sources"), Config.getInstance().deepintURL)).toString()+"?"+ new URLSearchParams({
         page: page+"",
         limit: limit+"",
@@ -28,7 +28,7 @@ export const getWorkspaceSources = async (idWorkspace:string,page:number=0,limit
 
 // create a new data source into a workspace
 // @ts-ignore
-export const postWorkspaceSource = async (idWorkspace:string,source:SourceToAdd)=> {
+const postWorkspaceSource = async (idWorkspace:string,source:SourceToAdd)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/sources"), Config.getInstance().deepintURL)).toString()
 
     const response: Response = await fetch(url, {
@@ -45,7 +45,7 @@ export const postWorkspaceSource = async (idWorkspace:string,source:SourceToAdd)
 
 // Clones a source
 // @ts-ignore
-export const postSourceClone = async (idWorkspace:string,idSource:string,name:string="") => {
+const postSourceClone = async (idWorkspace:string,idSource:string,name:string="") => {
     const url = (new URL("workspace/".concat(idWorkspace+"/source/"+idSource+"/clone"), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'POST',
@@ -93,4 +93,6 @@ export const postSourceClone = async (idWorkspace:string,idSource:string,name:st
 
   postWorkspaceSource("00000181d3c6b79d-ebbd4d36-3f01b009-dddd65d2",prueba);*/
 
-  postSourceClone("00000181d3c6b79d-ebbd4d36-3f01b009-dddd65d2", "1","prueba")
+//postSourceClone("00000181d3c6b79d-ebbd4d36-3f01b009-dddd65d2", "1","prueba")
+
+export {getWorkspaceSources,postWorkspaceSource,postSourceClone}

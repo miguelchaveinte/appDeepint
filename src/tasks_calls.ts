@@ -8,7 +8,7 @@ dotenv.config(); // Load env variables
 
 // get all tasks from a workspace
 // @ts-ignore
-export const getWorkspaceTasks = async (idWorkspace:string,page:number=0,limit:number=500)=> {
+const getWorkspaceTasks = async (idWorkspace:string,page:number=0,limit:number=500)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/tasks"), Config.getInstance().deepintURL)).toString()+"?"+ new URLSearchParams({
         page: page+"",
         limit: limit+"",
@@ -27,7 +27,7 @@ export const getWorkspaceTasks = async (idWorkspace:string,page:number=0,limit:n
 
 // get a task through its id from a workspace 
 // @ts-ignore
-export const getWorkspaceTaskById = async (idWorkspace:string,idTask:string)=> {
+const getWorkspaceTaskById = async (idWorkspace:string,idTask:string)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/tasks/"+idTask), Config.getInstance().deepintURL)).toString()
 
     const response: Response = await fetch(url, {
@@ -43,7 +43,7 @@ export const getWorkspaceTaskById = async (idWorkspace:string,idTask:string)=> {
 
 // delete a task through its id from a workspace 
 // @ts-ignore
-export const deleteWorkspaceTaskById = async (idWorkspace:string,idTask:string)=> {
+const deleteWorkspaceTaskById = async (idWorkspace:string,idTask:string)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/tasks/"+idTask), Config.getInstance().deepintURL)).toString()
 
     const response: Response = await fetch(url, {
@@ -56,3 +56,5 @@ export const deleteWorkspaceTaskById = async (idWorkspace:string,idTask:string)=
     const respuesta: ResultSuccess| ResponseError = await response.json();
     return respuesta;
 }
+
+export {getWorkspaceTasks,getWorkspaceTaskById,deleteWorkspaceTaskById};

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pre" : "tsc && node build/tasks_calls.js && node build/workspaces_calls.js",
+    "pre" : "tsc && node build/tasks_calls.js && node build/workspaces_calls.js && node build/sources_calls.js",
     "dev": "ts-node-dev src/tasks_calls.ts",
     "start": "node build/tasks_calls.js && node build/workspaces_calls.js",
     "tsc": "tsc",
@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "dotenv": "^16.0.1",
-    "express": "4.18.1",
     "node-fetch": "^2.6.7"
   }
 }

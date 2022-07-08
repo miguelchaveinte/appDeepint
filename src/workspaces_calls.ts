@@ -8,7 +8,7 @@ dotenv.config(); // Load env variables
 
 // getting all posts using fetch and parsing them into an array of Post objects
 // @ts-ignore
-const getWorkspaces = async () => {
+export const getWorkspaces = async () => {
     const url = (new URL("workspaces", Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'GET',
@@ -27,7 +27,7 @@ const getWorkspaces = async () => {
 
 // post a new workspace with the specified name and description
 // @ts-ignore
-const postWorkspaces = async (name: string="",description: string="") => {
+export const postWorkspaces = async (name: string="",description: string="") => {
     const url = (new URL("workspaces", Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'POST',
@@ -49,7 +49,7 @@ const postWorkspaces = async (name: string="",description: string="") => {
 
 // post a new workspace with the specified name and description and (mport from ZIP)
 // @ts-ignore
-const postWorkspacesImport = async (name: string="",description: string="", file: string="") => {
+export const postWorkspacesImport = async (name: string="",description: string="", file: string="") => {
     const url = (new URL("workspaces", Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'POST',
@@ -72,7 +72,7 @@ const postWorkspacesImport = async (name: string="",description: string="", file
 
 // get the infomation of a workspace by the id
 // @ts-ignore
-const getWorkspaceById = async (id: string) => {
+export const getWorkspaceById = async (id: string) => {
     const url = (new URL("workspace/".concat(id), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'GET',
@@ -89,7 +89,7 @@ const getWorkspaceById = async (id: string) => {
 
 // modifies a workspace name and description.
 // @ts-ignore
-const postWorkspaceById = async (id: string,name: string="",description: string="",disableIndividualAlerts: boolean=false,secret: string="") => {
+export const postWorkspaceById = async (id: string,name: string="",description: string="",disableIndividualAlerts: boolean=false,secret: string="") => {
     const url = (new URL("workspace/".concat(id), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'POST',
@@ -112,7 +112,7 @@ const postWorkspaceById = async (id: string,name: string="",description: string=
 
 // delete a workspace by the id 
 // @ts-ignore
-const deleteWorkspaceById = async (id: string) => {
+export const deleteWorkspaceById = async (id: string) => {
     const url = (new URL("workspace/".concat(id), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'DELETE',
@@ -129,7 +129,7 @@ const deleteWorkspaceById = async (id: string) => {
 
 // create iframe token for the workspace
 // @ts-ignore
-const postIframe = async (idWorkspace:string,iframe: Iframe) => {
+export const postIframe = async (idWorkspace:string,iframe: Iframe) => {
     const url = (new URL("workspace/".concat(idWorkspace+"/iframe"), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'POST',
@@ -145,7 +145,7 @@ const postIframe = async (idWorkspace:string,iframe: Iframe) => {
 
 // Exports a workspace to a ZIP file
 // @ts-ignore
-const postWorkspaceExport = async (idWorkspace:string) => {
+export const postWorkspaceExport = async (idWorkspace:string) => {
     const url = (new URL("workspace/".concat(idWorkspace+"/export"), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'POST',
@@ -160,7 +160,7 @@ const postWorkspaceExport = async (idWorkspace:string) => {
 
 // Clones a workspace
 // @ts-ignore
-const postWorkspaceClone = async (idWorkspace:string,name:string="") => {
+export const postWorkspaceClone = async (idWorkspace:string,name:string="") => {
     const url = (new URL("workspace/".concat(idWorkspace+"/clone"), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
         method: 'POST',

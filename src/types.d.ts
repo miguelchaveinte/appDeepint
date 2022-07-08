@@ -1,3 +1,4 @@
+//TYPES FOR WORKSPACE CALLS
 export interface Filters {
     source: string;
     root: QueryTree;
@@ -50,6 +51,8 @@ export type ResponseError = {
     message: string;
 }
 
+export type ResponseErrorSource = ResponseError & {result:string}
+
 export type ResultSuccess = {result: string;}
 
 export type ResultSuccessIframe = ResultSuccess & {
@@ -86,4 +89,46 @@ export type TaskById = Item & {
     result: string;
     result_type: string;
     error_description: string;
+}
+
+
+// TYPES FOR SOURCES CALLS
+
+type ItemSourceInterface = Item & {
+    last_modified: string;
+    last_access: string;
+    type: string;
+    features: number;   
+    instances: number;
+    size_bytes: number;
+}
+export type ItemSource = Omit<ItemSourceInterface, ("user_id"| "user_name"|"status"|"duration")> 
+
+export interface Source extends Omit<Task,"items"> {
+    items: Array<ItemSource>;
+}
+
+interface Feature{
+    name: string;
+    type: string;
+    date_format: string;
+    indexed: boolean;
+}
+
+export type SourceToAdd = {
+    name: string;
+    description: string;
+    features: Array<Feature>;
+}
+
+export type ResultSuccessSource = ResultSuccess & {source_id: string;}
+
+export interface SourceDerived extends Omit<SourceToAdd,"features"> {
+    derived_type: string;
+    origin: string;
+    origin_b: string;
+    query: QueryTree;
+    features: string;
+    field_a: number;
+    field_b: number;
 }

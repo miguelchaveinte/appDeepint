@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pre" : "tsc && node build/index.js ",
-    "dev": "ts-node-dev src/index.ts",
-    "start": "node build/index.js",
+    "pre" : "tsc && node build/workspaces_calls.js ",
+    "dev": "ts-node-dev src/workspaces_calls.ts",
+    "start": "node build/workspaces_calls.js",
     "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,3 +25,4 @@
     "node-fetch": "^2.6.7"
   }
 }
+

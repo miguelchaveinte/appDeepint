@@ -47,7 +47,7 @@ const postWorkspaces = async (name: string="",description: string="") => {
     return respuesta;
 };
 
-// post a new workspace with the specified name and description
+// post a new workspace with the specified name and description and (mport from ZIP)
 // @ts-ignore
 const postWorkspacesImport = async (name: string="",description: string="", file: string="") => {
     const url = (new URL("workspaces", Config.getInstance().deepintURL)).toString();
@@ -70,6 +70,7 @@ const postWorkspacesImport = async (name: string="",description: string="", file
     return respuesta;
 };
 
+// get the infomation of a workspace by the id
 // @ts-ignore
 const getWorkspaceById = async (id: string) => {
     const url = (new URL("workspace/".concat(id), Config.getInstance().deepintURL)).toString();
@@ -86,6 +87,7 @@ const getWorkspaceById = async (id: string) => {
     return workspace;
 };
 
+// modifies a workspace name and description.
 // @ts-ignore
 const postWorkspaceById = async (id: string,name: string="",description: string="",disableIndividualAlerts: boolean=false,secret: string="") => {
     const url = (new URL("workspace/".concat(id), Config.getInstance().deepintURL)).toString();
@@ -108,6 +110,7 @@ const postWorkspaceById = async (id: string,name: string="",description: string=
     return respuesta;
 };
 
+// delete a workspace by the id 
 // @ts-ignore
 const deleteWorkspaceById = async (id: string) => {
     const url = (new URL("workspace/".concat(id), Config.getInstance().deepintURL)).toString();
@@ -124,6 +127,7 @@ const deleteWorkspaceById = async (id: string) => {
     return respuesta;
 };
 
+// create iframe token for the workspace
 // @ts-ignore
 const postIframe = async (idWorkspace:string,iframe: Iframe) => {
     const url = (new URL("workspace/".concat(idWorkspace+"/iframe"), Config.getInstance().deepintURL)).toString();
@@ -139,6 +143,7 @@ const postIframe = async (idWorkspace:string,iframe: Iframe) => {
     return respuesta;
 }
 
+// Exports a workspace to a ZIP file
 // @ts-ignore
 const postWorkspaceExport = async (idWorkspace:string) => {
     const url = (new URL("workspace/".concat(idWorkspace+"/export"), Config.getInstance().deepintURL)).toString();
@@ -153,6 +158,7 @@ const postWorkspaceExport = async (idWorkspace:string) => {
     return respuesta;
 }
 
+// Clones a workspace
 // @ts-ignore
 const postWorkspaceClone = async (idWorkspace:string,name:string="") => {
     const url = (new URL("workspace/".concat(idWorkspace+"/clone"), Config.getInstance().deepintURL)).toString();
@@ -169,30 +175,3 @@ const postWorkspaceClone = async (idWorkspace:string,name:string="") => {
     const respuesta: ResponseWorkspaceImport| ResponseError = await response.json();
     return respuesta;
 }
-
-
-//getWorkspaces();
-//postWorkspaces("test","descripcion de prueba");
-//getWorkspaceById("00000181d3c6b79d-ebbd4d36-3f01b009-dddd65d2");
-//postWorkspaceById("00000181d3c6b79d-ebbd4d36-3f01b009-dddd65d2","test","descripcion de prueba",false,"secret");
-//deleteWorkspaceById("00000181d3c6b79d-ebbd4d36-3f01b009-dddd65d2");
-/*const prueba : Iframe = {
-    "type": "dashboard",
-    "id": "xxxxx-xxxxx-xxxxx-xxxxx",
-    "filters": [
-      {
-        "source": "xxxxx-xxxxx-xxxxx-xxxxx",
-        "root": {
-          "type": "anyof",
-          "operation": "null",
-          "left": 0,
-          "right": "string",
-          "children": [
-          ]
-        }
-      }
-    ]
-  }
-postIframe("00000181d3c6b79d-ebbd4d36-3f01b009-dddd65d2",prueba)*/
-//postWorkspaceExport("00000181d3c6b79d-ebbd4d36-3f01b009-dddd65d2")
-//postWorkspaceClone("00000181d3c6b79d-ebbd4d36-3f01b009-dddd65d2","test")

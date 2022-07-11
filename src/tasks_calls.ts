@@ -1,10 +1,8 @@
 import { Response } from 'node-fetch';
 import { Config } from "./config";
-import dotenv from "dotenv";
 import fetch from 'node-fetch';
 import { ResponseError, ResultSuccess, Task, TaskById } from './types';
 
-dotenv.config(); // Load env variables
 
 // get all tasks from a workspace
 // @ts-ignore

@@ -2,9 +2,7 @@
 
 "use strict";
 
-import dotenv from "dotenv";
-
-dotenv.config(); // Load env variables
+import 'dotenv/config';
 
 /**
  * Configuration class
@@ -28,6 +26,9 @@ export class Config {
     public X_AUTH_TOKEN: string;
     public X_DEEPINT_ORGANIZATION: string;
 
+    public pubKey: string;
+    public secretKey: string;
+
 
 
     constructor() {
@@ -35,6 +36,9 @@ export class Config {
         this.deepintURL = process.env.DEEPINT_API_URL || "https://app.deepint.net/api/v1/";
         this.X_AUTH_TOKEN = process.env.X_AUTH_TOKEN || "";
         this.X_DEEPINT_ORGANIZATION = process.env.X_DEEPINT_ORGANIZATION || "";
+
+        this.pubKey = process.env.SOURCE_PUB_KEY || "";
+        this.secretKey = process.env.SOURCE_SECRET_KEY || "";
 
     }
 }

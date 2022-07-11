@@ -108,12 +108,39 @@ export interface Source extends Omit<Task,"items"> {
     items: Array<ItemSource>;
 }
 
+type FeatureType= 'numeric' | 'nominal' | 'text' | 'date' | 'logic' | 'unknown';
+
 interface Feature{
     name: string;
-    type: string;
+    type: FeatureType;
     date_format: string;
     indexed: boolean;
 }
+
+interface FeatureExport extends Omit<Feature,"indexed"> {
+    index: number;
+}
+
+export interface FeatureMapped extends Feature {
+    mapped_to: number;
+}
+
+
+interface FeatureSourceResult{
+    index: number;
+    name: string;
+    type: string;
+    indexed: boolean;
+    date_format: string;
+    computed: boolean;
+    null_count: number;
+    min: number;
+    max: number;
+    mean: number;
+    deviation: number;
+}
+
+export type FeatureSourceExternal = Omit<Feature, ("date_format"| "indexed")> 
 
 export type SourceToAdd = {
     name: string;
@@ -131,4 +158,122 @@ export interface SourceDerived extends Omit<SourceToAdd,"features"> {
     features: string;
     field_a: number;
     field_b: number;
+}
+
+
+export interface SourceExternal extends Omit<SourceToAdd,"features">{
+    url: string;
+    features: Array<FeatureSourceExternal>;
+}
+
+
+export type FieldType= 'numeric' | 'nominal' | 'text' | 'date' | 'logic'
+
+export type Fields ={
+    name: string;
+    type: FieldType;
+    dateFormat: string;
+}
+
+export type TypeSource= 'file/any' | 'url/any' | 's3' | 'ckan' | 'database/mongo' | 'database/mysql' | 'database/influx' | 'mqtt' 
+export type JsonMode= 'single' | 'default' 
+export type ParserType= 'csv' | 'json'
+export type SortingDirection= 'asc' | 'desc'
+export type DatabaseType= 'mysql' | 'pg' | 'oracle' | 'ms'
+
+
+export interface SourceOther {
+    name: string;
+    description: string;
+    type: TypeSource;
+    encrypted: boolean;
+    indexed: boolean;
+    dyn_enabled: boolean;
+    dyn_delay: number;
+    dyn_replace:boolean;
+    dyn_pk: string;
+    dyn_update_mode: boolean;
+    file: string;
+    file_name: string;
+    separator: string;
+    quotes: string;
+    csv_header: boolean;
+    json_fields: Array<string>;
+    json_prefix: string;
+    json_mode: JsonMode;
+    date_format: string;
+    url: string;
+    parser: ParserType;
+    http_headers: string;
+    rejectUnauthorized: boolean;
+    sdp_enabled: boolean;
+    sdp_name: string;
+    sdp_dir: SortingDirection;
+    database: string;
+    user: string;
+    password: string;
+    table:string;
+    query: string;
+    sort: string;
+    project: string;
+    limit: number;
+    db: DatabaseType;
+    host: string;
+    port: number;
+    topics: string;
+    fields_expected: Array<Fields>;
+}
+
+export interface SourceResult {
+    id:string;
+    created:string;
+    last_modified:string;
+    last_access: string;
+    name:string;
+    description:string;
+    type: string;
+    features: Array<FeatureSourceResult>;
+    instances: number;
+    size_bytes: number;
+}
+
+export interface ResultConnection { url:string;}
+
+export interface ConfigurationSource extends Omit<SourceOther,("name" | "type" | "encrypted" | "indexed" | "dyn_enabled" | "dyn_delay" | "dyn_replace" | "dyn_pk" | "dyn_update_mode" | "file" | "file_name" | "fields_expected")>{
+    noheader: boolean;
+}
+
+export interface UpdateConfiguration {
+    description:string;
+    enabled:boolean;
+    delay:number;
+    replace:boolean;
+    updateMode:boolean; 
+    pk:string;
+    configuration:ConfigurationSource;
+}
+
+export interface AutoUpdateConfiguration { updateConfig:UpdateConfiguration; } 
+
+export type ConfigurationSourceResult = Omit<SourceOther,("name" | "description" |"type" | "encrypted" | "indexed" | "file" | "file_name")>
+
+export type TransformFeatures ={
+    features: Array<FeatureMapped>;
+}
+
+export type Instances ={
+    features: Array<FeatureExport>;
+    instances: Array<Array<string>>;
+}
+
+export interface UpdateDataSource {
+    replace: boolean;
+    pk: string;
+    date_format: string;
+    data: Array<Array<string>>;
+}
+
+export interface SourceSet {
+    name: string;
+    description: string;
 }

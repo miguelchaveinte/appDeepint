@@ -1,10 +1,8 @@
 import { Iframe, ResponseError, ResponseWorkspace, ResponseWorkspaceImport, ResultSuccess, ResultSuccessIframe, Workspace, WorkspaceById } from './types';
 import { Response } from 'node-fetch';
 import { Config } from "./config";
-import dotenv from "dotenv";
 import fetch from 'node-fetch';
 
-dotenv.config(); // Load env variables
 
 // getting all posts using fetch and parsing them into an array of Post objects
 // @ts-ignore

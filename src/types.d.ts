@@ -421,3 +421,28 @@ export type VisualizationResult = ItemVisualization & {
     source: string;
     configuration: VisualizationConfig;
 }
+
+
+// TYPES FOR DASHBOARDS CALLS
+
+type ItemDashboard = Omit<ItemVisualization, "type">
+
+export interface Dashboard {
+    page: number;
+    limit: number;
+    pages_count: number;
+    items_count: number;
+    items: Array<ItemDashboard>;
+}
+
+export interface DashboardImport {
+    name: string;
+    description: string;
+    privacy: string;
+    shareOpt: string;
+    gaId: string;
+    restricted: boolean;
+    configuration: Array<>
+}
+
+export type ResultSuccessDashboard = ResultSuccess & {dashboard_id: string;}

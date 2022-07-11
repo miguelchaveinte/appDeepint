@@ -38,12 +38,12 @@ export type WorkspaceById = Workspace & {
     secret: string;
 }
 
-export type ResponseWorkspace ={
-    result: string; 
+export type ResponseWorkspace = {
+    result: string;
     workspace_id: string;
 }
 
-export type ResponseWorkspaceImport = ResponseWorkspace & {task_id: string}
+export type ResponseWorkspaceImport = ResponseWorkspace & { task_id: string }
 export type ResponseWorkspaceExport = Omit<ResponseWorkspaceImport, "workspace_id">
 
 export type ResponseError = {
@@ -51,9 +51,9 @@ export type ResponseError = {
     message: string;
 }
 
-export type ResponseErrorSource = ResponseError & {result:string}
+export type ResponseErrorSource = ResponseError & { result: string }
 
-export type ResultSuccess = {result: string;}
+export type ResultSuccess = { result: string; }
 
 export type ResultSuccessIframe = ResultSuccess & {
     token: string;
@@ -98,26 +98,26 @@ type ItemSourceInterface = Item & {
     last_modified: string;
     last_access: string;
     type: string;
-    features: number;   
+    features: number;
     instances: number;
     size_bytes: number;
 }
-export type ItemSource = Omit<ItemSourceInterface, ("user_id"| "user_name"|"status"|"duration")> 
+export type ItemSource = Omit<ItemSourceInterface, ("user_id" | "user_name" | "status" | "duration")>
 
-export interface Source extends Omit<Task,"items"> {
+export interface Source extends Omit<Task, "items"> {
     items: Array<ItemSource>;
 }
 
-type FeatureType= 'numeric' | 'nominal' | 'text' | 'date' | 'logic' | 'unknown';
+type FeatureType = 'numeric' | 'nominal' | 'text' | 'date' | 'logic' | 'unknown';
 
-interface Feature{
+interface Feature {
     name: string;
     type: FeatureType;
     date_format: string;
     indexed: boolean;
 }
 
-interface FeatureExport extends Omit<Feature,"indexed"> {
+interface FeatureExport extends Omit<Feature, "indexed"> {
     index: number;
 }
 
@@ -126,7 +126,7 @@ export interface FeatureMapped extends Feature {
 }
 
 
-interface FeatureSourceResult{
+interface FeatureSourceResult {
     index: number;
     name: string;
     type: string;
@@ -140,7 +140,7 @@ interface FeatureSourceResult{
     deviation: number;
 }
 
-export type FeatureSourceExternal = Omit<Feature, ("date_format"| "indexed")> 
+export type FeatureSourceExternal = Omit<Feature, ("date_format" | "indexed")>
 
 export type SourceToAdd = {
     name: string;
@@ -148,9 +148,9 @@ export type SourceToAdd = {
     features: Array<Feature>;
 }
 
-export type ResultSuccessSource = ResultSuccess & {source_id: string;}
+export type ResultSuccessSource = ResultSuccess & { source_id: string; }
 
-export interface SourceDerived extends Omit<SourceToAdd,"features"> {
+export interface SourceDerived extends Omit<SourceToAdd, "features"> {
     derived_type: string;
     origin: string;
     origin_b: string;
@@ -161,25 +161,25 @@ export interface SourceDerived extends Omit<SourceToAdd,"features"> {
 }
 
 
-export interface SourceExternal extends Omit<SourceToAdd,"features">{
+export interface SourceExternal extends Omit<SourceToAdd, "features"> {
     url: string;
     features: Array<FeatureSourceExternal>;
 }
 
 
-export type FieldType= 'numeric' | 'nominal' | 'text' | 'date' | 'logic'
+export type FieldType = 'numeric' | 'nominal' | 'text' | 'date' | 'logic'
 
-export type Fields ={
+export type Fields = {
     name: string;
     type: FieldType;
     dateFormat: string;
 }
 
-export type TypeSource= 'file/any' | 'url/any' | 's3' | 'ckan' | 'database/mongo' | 'database/mysql' | 'database/influx' | 'mqtt' 
-export type JsonMode= 'single' | 'default' 
-export type ParserType= 'csv' | 'json'
-export type SortingDirection= 'asc' | 'desc'
-export type DatabaseType= 'mysql' | 'pg' | 'oracle' | 'ms'
+export type TypeSource = 'file/any' | 'url/any' | 's3' | 'ckan' | 'database/mongo' | 'database/mysql' | 'database/influx' | 'mqtt'
+export type JsonMode = 'single' | 'default'
+export type ParserType = 'csv' | 'json'
+export type SortingDirection = 'asc' | 'desc'
+export type DatabaseType = 'mysql' | 'pg' | 'oracle' | 'ms'
 
 
 export interface SourceOther {
@@ -190,7 +190,7 @@ export interface SourceOther {
     indexed: boolean;
     dyn_enabled: boolean;
     dyn_delay: number;
-    dyn_replace:boolean;
+    dyn_replace: boolean;
     dyn_pk: string;
     dyn_update_mode: boolean;
     file: string;
@@ -212,7 +212,7 @@ export interface SourceOther {
     database: string;
     user: string;
     password: string;
-    table:string;
+    table: string;
     query: string;
     sort: string;
     project: string;
@@ -225,43 +225,43 @@ export interface SourceOther {
 }
 
 export interface SourceResult {
-    id:string;
-    created:string;
-    last_modified:string;
+    id: string;
+    created: string;
+    last_modified: string;
     last_access: string;
-    name:string;
-    description:string;
+    name: string;
+    description: string;
     type: string;
     features: Array<FeatureSourceResult>;
     instances: number;
     size_bytes: number;
 }
 
-export interface ResultConnection { url:string;}
+export interface ResultConnection { url: string; }
 
-export interface ConfigurationSource extends Omit<SourceOther,("name" | "type" | "encrypted" | "indexed" | "dyn_enabled" | "dyn_delay" | "dyn_replace" | "dyn_pk" | "dyn_update_mode" | "file" | "file_name" | "fields_expected")>{
+export interface ConfigurationSource extends Omit<SourceOther, ("name" | "type" | "encrypted" | "indexed" | "dyn_enabled" | "dyn_delay" | "dyn_replace" | "dyn_pk" | "dyn_update_mode" | "file" | "file_name" | "fields_expected")> {
     noheader: boolean;
 }
 
 export interface UpdateConfiguration {
-    description:string; //REVISAR QUE TIENE ESTE CAMPO
-    enabled:boolean;
-    delay:number;
-    replace:boolean;
-    updateMode:boolean; 
-    pk:string;
-    configuration:ConfigurationSource;
+    description: string; //REVISAR QUE TIENE ESTE CAMPO
+    enabled: boolean;
+    delay: number;
+    replace: boolean;
+    updateMode: boolean;
+    pk: string;
+    configuration: ConfigurationSource;
 }
 
-export interface AutoUpdateConfiguration { updateConfig:UpdateConfiguration; } 
+export interface AutoUpdateConfiguration { updateConfig: UpdateConfiguration; }
 
-export type ConfigurationSourceResult = Omit<SourceOther,("name" | "description" |"type" | "encrypted" | "indexed" | "file" | "file_name")>
+export type ConfigurationSourceResult = Omit<SourceOther, ("name" | "description" | "type" | "encrypted" | "indexed" | "file" | "file_name")>
 
-export type TransformFeatures ={
+export type TransformFeatures = {
     features: Array<FeatureMapped>;
 }
 
-export type Instances ={
+export type Instances = {
     features: Array<FeatureExport>;
     instances: Array<Array<string>>;
 }
@@ -305,14 +305,14 @@ interface tableVisualization {
     type: string;
 }
 
-type tableVisualizationGroup = tableVisualization &  {g: string;}
+type tableVisualizationGroup = tableVisualization & { g: string; }
 
-type customSeries ={
+type customSeries = {
     index: number;
     type: string;
     axisType: string;  // string, array, undefined ???
-    label:string;
-    units:string;
+    label: string;
+    units: string;
 }
 
 interface VisualizationConfig {
@@ -334,77 +334,77 @@ interface VisualizationConfig {
     unitsX: string;
     unitsY: string;
     unitsZ: string;
-    unitsS:string;
-    labelX:string;
-    labelY:string;
-    labelZ:string;
-    labelS:string;
+    unitsS: string;
+    labelX: string;
+    labelY: string;
+    labelZ: string;
+    labelS: string;
     numericIntervals: number;
-    ranges:string;
+    ranges: string;
     useRanges: boolean;
-    tablePrimaryDisplay:Array<tableVisualization>;
-    tableMakeGroups:Array<tableVisualizationGroup>;
-    tableExtraCols:Array<tableVisualizationGroup>;
+    tablePrimaryDisplay: Array<tableVisualization>;
+    tableMakeGroups: Array<tableVisualizationGroup>;
+    tableExtraCols: Array<tableVisualizationGroup>;
     durationValue: number;
     durationUnits: string;
     customSeries: Array<customSeries>;
     mapcenter: string;
-    lat:number;
-    lng:number;
-    zoom:number;
-    maxZoom:number;
-    blur:number;
-    radious:number;
+    lat: number;
+    lng: number;
+    zoom: number;
+    maxZoom: number;
+    blur: number;
+    radious: number;
     wordCloudMode: string;
     ignoreSeries: boolean;
-    social:string;
+    social: string;
     groupingMethod: string;
     customOrder: string;
     customOrderHeat: string;
     custom_url: string;
-    custom_params: Array<{key: string, value: string}>;
+    custom_params: Array<{ key: string, value: string }>;
     custom_params_mode: string;
     showTitle: boolean;
     showScrollbars: boolean;
-    showLegend:boolean;
+    showLegend: boolean;
     showGrid: boolean;
-    showRaw:boolean;
-    fillSeries:boolean;
-    stacked:boolean;
-    layered:boolean;
-    mapCluster:boolean;
-    clusterField:number;
+    showRaw: boolean;
+    fillSeries: boolean;
+    stacked: boolean;
+    layered: boolean;
+    mapCluster: boolean;
+    clusterField: number;
     clusterMode: string;
-    showArrows:boolean;
-    axisTitles:boolean;
-    hasPadding:boolean;
-    axisLabels:boolean;
-    trendLines:boolean;
-    inversedAxis:boolean;
-    customMarker:string;
-    useMagnitude:boolean;
-    avgCoords:boolean;
-    fontSize:number;
-    titleFontSize:number;
-    background:string;
-    xAxisDispStyle:string;
-    colors:string;
-    useCustomColors:boolean;
-    useMultipleScales:boolean;
-    showSeriesLabels:boolean;
-    tension:number;
-    strokeWidth:number;
-    bullets:string;
-    decimalDigits:number;
-    scrollbarSize:number;
-    legendPos:string;
-    noanimations:boolean;
-    autoreload:boolean;
-    fillColor:string;
-    minColor:string;
-    maxColor:string;
-    cmc: Array<{from:number; to:number; fillColor:string;}>;
-    categoryMap: Array<{index:number; name: string; map:Array<{key: string, value: string}> }>;
+    showArrows: boolean;
+    axisTitles: boolean;
+    hasPadding: boolean;
+    axisLabels: boolean;
+    trendLines: boolean;
+    inversedAxis: boolean;
+    customMarker: string;
+    useMagnitude: boolean;
+    avgCoords: boolean;
+    fontSize: number;
+    titleFontSize: number;
+    background: string;
+    xAxisDispStyle: string;
+    colors: string;
+    useCustomColors: boolean;
+    useMultipleScales: boolean;
+    showSeriesLabels: boolean;
+    tension: number;
+    strokeWidth: number;
+    bullets: string;
+    decimalDigits: number;
+    scrollbarSize: number;
+    legendPos: string;
+    noanimations: boolean;
+    autoreload: boolean;
+    fillColor: string;
+    minColor: string;
+    maxColor: string;
+    cmc: Array<{ from: number; to: number; fillColor: string; }>;
+    categoryMap: Array<{ index: number; name: string; map: Array<{ key: string, value: string }> }>;
 }
 export interface VisualizationImport {
     name: string;
@@ -414,7 +414,7 @@ export interface VisualizationImport {
     configuration: VisualizationConfig;
 }
 
-export type ResultSuccessSource = ResultSuccess & {visualization_id: string;}
+export type ResultSuccessSource = ResultSuccess & { visualization_id: string; }
 
 export type VisualizationResult = ItemVisualization & {
     public: boolean;
@@ -445,4 +445,13 @@ export interface DashboardImport {
     configuration: Array<>
 }
 
-export type ResultSuccessDashboard = ResultSuccess & {dashboard_id: string;}
+export type DashboarResult = DashboardImport & {
+    id: string;
+    created: string;
+    last_modified: string;
+    last_access: string;
+}
+
+export type ResultSuccessDashboard = ResultSuccess & { dashboard_id: string; }
+
+export type deleteVisualization = 'yes' | 'no';

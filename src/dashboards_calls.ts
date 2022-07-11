@@ -99,7 +99,6 @@ const postDashboardClone = async (idWorkspace: string, idDashboard: string, name
         body: JSON.stringify(name),
     })
     const respuesta: ResultSuccessDashboard | ResponseErrorSource | ResponseError = await response.json();  // ResponseError devuelve aunque en la documentación de la API dice que es un ResponseErrorSource
-    console.log(respuesta);
     return respuesta;
 }
 

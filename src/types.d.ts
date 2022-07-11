@@ -7,10 +7,10 @@ export interface Filters {
 //Source: https://github.com/deepintdev/deepint-external-source-mongo/blob/master/src/utils/deepint-sources.ts
 export interface QueryTree {
     type: string;
-    operation: string;
+    operation: string | null;
     left: number;
     right: string;
-    children: QueryTree[];
+    children: QueryTree[] | Array<string>;
 }
 
 export type Iframe = {
@@ -244,7 +244,7 @@ export interface ConfigurationSource extends Omit<SourceOther,("name" | "type" |
 }
 
 export interface UpdateConfiguration {
-    description:string;
+    description:string; //REVISAR QUE TIENE ESTE CAMPO
     enabled:boolean;
     delay:number;
     replace:boolean;
@@ -276,4 +276,148 @@ export interface UpdateDataSource {
 export interface SourceSet {
     name: string;
     description: string;
+}
+
+
+// TYPES FOR VISUALIZATIONS CALLS
+
+type ItemVisualization = {
+    id: string;
+    created: string;
+    last_modified: string;
+    last_access: string;
+    name: string;
+    description: string;
+    type: string;
+}
+
+export interface Visualization {
+    page: number;
+    limit: number;
+    pages_count: number;
+    items_count: number;
+    items: Array<ItemVisualization>;
+}
+
+interface tableVisualization {
+    index: number;
+    name: string;
+    type: string;
+}
+
+type tableVisualizationGroup = tableVisualization &  {g: string;}
+
+type customSeries ={
+    index: number;
+    type: string;
+    axisType: string;  // string, array, undefined ???
+    label:string;
+    units:string;
+}
+
+interface VisualizationConfig {
+    type: string;
+    instances: number;
+    instOrder: number;
+    instDir: string;
+    filter: QueryTree;
+    xAxisType: string;
+    yAxisType: string;
+    zAxisType: string;
+    xAxisFeature: number;
+    yAxisFeature: number;
+    zAxisFeature: number;
+    seriesMaker: number;
+    minValue: number;
+    maxValue: number;
+    units: string;
+    unitsX: string;
+    unitsY: string;
+    unitsZ: string;
+    unitsS:string;
+    labelX:string;
+    labelY:string;
+    labelZ:string;
+    labelS:string;
+    numericIntervals: number;
+    ranges:string;
+    useRanges: boolean;
+    tablePrimaryDisplay:Array<tableVisualization>;
+    tableMakeGroups:Array<tableVisualizationGroup>;
+    tableExtraCols:Array<tableVisualizationGroup>;
+    durationValue: number;
+    durationUnits: string;
+    customSeries: Array<customSeries>;
+    mapcenter: string;
+    lat:number;
+    lng:number;
+    zoom:number;
+    maxZoom:number;
+    blur:number;
+    radious:number;
+    wordCloudMode: string;
+    ignoreSeries: boolean;
+    social:string;
+    groupingMethod: string;
+    customOrder: string;
+    customOrderHeat: string;
+    custom_url: string;
+    custom_params: Array<{key: string, value: string}>;
+    custom_params_mode: string;
+    showTitle: boolean;
+    showScrollbars: boolean;
+    showLegend:boolean;
+    showGrid: boolean;
+    showRaw:boolean;
+    fillSeries:boolean;
+    stacked:boolean;
+    layered:boolean;
+    mapCluster:boolean;
+    clusterField:number;
+    clusterMode: string;
+    showArrows:boolean;
+    axisTitles:boolean;
+    hasPadding:boolean;
+    axisLabels:boolean;
+    trendLines:boolean;
+    inversedAxis:boolean;
+    customMarker:string;
+    useMagnitude:boolean;
+    avgCoords:boolean;
+    fontSize:number;
+    titleFontSize:number;
+    background:string;
+    xAxisDispStyle:string;
+    colors:string;
+    useCustomColors:boolean;
+    useMultipleScales:boolean;
+    showSeriesLabels:boolean;
+    tension:number;
+    strokeWidth:number;
+    bullets:string;
+    decimalDigits:number;
+    scrollbarSize:number;
+    legendPos:string;
+    noanimations:boolean;
+    autoreload:boolean;
+    fillColor:string;
+    minColor:string;
+    maxColor:string;
+    cmc: Array<{from:number; to:number; fillColor:string;}>;
+    categoryMap: Array<{index:number; name: string; map:Array<{key: string, value: string}> }>;
+}
+export interface VisualizationImport {
+    name: string;
+    description: string;
+    privacy: string;
+    source: string;
+    configuration: VisualizationConfig;
+}
+
+export type ResultSuccessSource = ResultSuccess & {visualization_id: string;}
+
+export type VisualizationResult = ItemVisualization & {
+    public: boolean;
+    source: string;
+    configuration: VisualizationConfig;
 }

@@ -3,7 +3,7 @@ import { Config } from "./config";
 import fetch from 'node-fetch';
 import { Dashboard, DashboardImport, DashboarResult, ResponseError, ResponseErrorSource, ResultSuccess, ResultSuccessDashboard, deleteVisualization } from './types';
 
-
+//Lists the dashboards of a workspace
 // @ts-ignore
 const getWorkspaceDashboards = async (idWorkspace: string, page: number = 0, limit: number = 500) => {
     let url = (new URL("workspace/".concat(idWorkspace + "/dashboards"), Config.getInstance().deepintURL)).toString() + "?" + new URLSearchParams({
@@ -22,6 +22,7 @@ const getWorkspaceDashboards = async (idWorkspace: string, page: number = 0, lim
     return respuesta;
 }
 
+// Creates new dashboard
 // @ts-ignore
 const postWorkspaceDashboards = async (idWorkspace: string, dashboard: DashboardImport) => {
     let url = (new URL("workspace/".concat(idWorkspace + "/dashboards"), Config.getInstance().deepintURL)).toString()
@@ -38,6 +39,7 @@ const postWorkspaceDashboards = async (idWorkspace: string, dashboard: Dashboard
     return respuesta;
 }
 
+// Gets dashboard data
 // @ts-ignore
 const getWorkspaceDashboardById = async (idWorkspace: string, idDashboard: string) => {
     let url = (new URL("workspace/".concat(idWorkspace + "/dashboard/" + idDashboard), Config.getInstance().deepintURL)).toString()
@@ -53,6 +55,7 @@ const getWorkspaceDashboardById = async (idWorkspace: string, idDashboard: strin
     return respuesta;
 }
 
+// Modifies dashboard
 // @ts-ignore
 const postWorkspaceDashboardById = async (idWorkspace: string, idDashboard: string, dashboard: DashboardImport) => {
     let url = (new URL("workspace/".concat(idWorkspace + "/dashboard/" + idDashboard), Config.getInstance().deepintURL)).toString()
@@ -69,6 +72,7 @@ const postWorkspaceDashboardById = async (idWorkspace: string, idDashboard: stri
     return respuesta;
 }
 
+// Deletes dashboard
 // @ts-ignore
 const deleteWorkspaceDashboardById = async (idWorkspace: string, idDashboard: string, deleteVis: deleteVisualization) => {
     let url = (new URL("workspace/".concat(idWorkspace + "/dashboard/" + idDashboard), Config.getInstance().deepintURL)).toString() + "?" + new URLSearchParams({
@@ -86,6 +90,7 @@ const deleteWorkspaceDashboardById = async (idWorkspace: string, idDashboard: st
     return respuesta;
 }
 
+// Clones a dashboard
 // @ts-ignore
 const postDashboardClone = async (idWorkspace: string, idDashboard: string, name: { name: string }) => {
     let url = (new URL("workspace/".concat(idWorkspace + "/dashboard/" + idDashboard), Config.getInstance().deepintURL)).toString()

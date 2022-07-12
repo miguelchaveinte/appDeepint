@@ -244,7 +244,6 @@ export interface ConfigurationSource extends Omit<SourceOther, ("name" | "type" 
 }
 
 export interface UpdateConfiguration {
-    description: string; //REVISAR QUE TIENE ESTE CAMPO
     enabled: boolean;
     delay: number;
     replace: boolean;
@@ -442,7 +441,7 @@ export interface DashboardImport {
     shareOpt: string;
     gaId: string;
     restricted: boolean;
-    configuration: Array<>
+    configuration: object;
 }
 
 export type DashboarResult = DashboardImport & {
@@ -455,3 +454,90 @@ export type DashboarResult = DashboardImport & {
 export type ResultSuccessDashboard = ResultSuccess & { dashboard_id: string; }
 
 export type deleteVisualization = 'yes' | 'no';
+
+
+// TYPES FOR MODELS CALLS
+
+type ItemModels = {
+    id: string;
+    created: string;
+    last_modified: string;
+    last_access: string;
+    name: string;
+    description: string;
+    type: string;
+    size_bytes: number;
+}
+
+export interface Models {
+    page: number;
+    limit: number;
+    pages_count: number;
+    items_count: number;
+    items: Array<ItemModels>;
+}
+
+export interface ModelsImport {
+    name: string;
+    description: string;
+    type: string;
+    method: string;
+    source: string;
+    target: number;
+    configuration: object;
+    training_configuration: {
+        test_size: number;
+        shuffle: boolean;
+        random_state: number;
+    };
+    hyper_search_configuration: object;
+}
+
+export interface ModelsResult {
+    id: string;
+    name: string;
+    description: string;
+    type: string;
+    method: string;
+    created: string;
+    last_modified: string;
+    last_access: string;
+    source_train: string;
+    configuration: object;
+    inputs: Array<{
+        name: string;
+        type: string;
+    }>;
+    output:{
+        name: string;
+        type: string;
+    };
+    size_bytes: number;
+}
+
+export type ModelSet = {
+    name: string;
+    description: string;
+}
+
+export interface ModelEvaluation {
+    evaluation: object;
+    "op-diagram": {
+        observed:Array<number>;
+        predicted: Array<number>;
+    };
+    confusion: Array<Array<number>>;
+    classes: Array<string>;
+}
+
+export interface ModelData {
+    data: Array<{
+        inputs: Array<number>;
+    }>;
+}
+
+export interface ModelPredict {
+    inputs: Array<number>;
+    vary: number;
+    values: Array<number>;
+}

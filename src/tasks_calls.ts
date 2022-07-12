@@ -4,8 +4,13 @@ import fetch from 'node-fetch';
 import { ResponseError, ResultSuccess, Task, TaskById } from './types';
 
 
-// get all tasks from a workspace
-// @ts-ignore
+/**
+ * Get all tasks from a workspace
+ * @param idWorkspace Id of the workspace
+ * @param page Requested page (starts with 0). Default value 0
+ * @param limit Max number of items per page (max 500). Default value 500
+ * @returns  List of data of all tasks or Error Message 
+ */
 const getWorkspaceTasks = async (idWorkspace:string,page:number=0,limit:number=500)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/tasks"), Config.getInstance().deepintURL)).toString()+"?"+ new URLSearchParams({
         page: page+"",
@@ -23,8 +28,13 @@ const getWorkspaceTasks = async (idWorkspace:string,page:number=0,limit:number=5
     return respuesta;
 }
 
-// get a task through its id from a workspace 
-// @ts-ignore
+
+/**
+ * Obtains task information
+ * @param idWorkspace  Id of the workspace 
+ * @param idTask  Id of the task to retrieve
+ * @returns The task information object or Error Message
+ */
 const getWorkspaceTaskById = async (idWorkspace:string,idTask:string)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/tasks/"+idTask), Config.getInstance().deepintURL)).toString()
 
@@ -39,8 +49,12 @@ const getWorkspaceTaskById = async (idWorkspace:string,idTask:string)=> {
     return respuesta;
 }
 
-// delete a task through its id from a workspace 
-// @ts-ignore
+/**
+ * Force stops a running task.
+ * @param idWorkspace Id of the workspace 
+ * @param idTask Id of the task to stop
+ * @returns Success Message or Error Message 
+ */
 const deleteWorkspaceTaskById = async (idWorkspace:string,idTask:string)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/tasks/"+idTask), Config.getInstance().deepintURL)).toString()
 

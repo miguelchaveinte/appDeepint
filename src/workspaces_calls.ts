@@ -4,8 +4,10 @@ import { Config } from "./config";
 import fetch from 'node-fetch';
 
 
-// getting all posts using fetch and parsing them into an array of Post objects
-// @ts-ignore
+/**
+ * Obtains the list of workspaces
+ * @returns List of all workspaces or Error Message
+ */
 const getWorkspaces = async () => {
     const url = (new URL("workspaces", Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
@@ -23,8 +25,12 @@ const getWorkspaces = async () => {
 };
 
 
-// post a new workspace with the specified name and description
-// @ts-ignore
+/**
+ * Creates a new workspace
+ * @param name Name of the new workspace
+ * @param description Description of the new workspace
+ * @returns Success Message with the workspace id of the operation or Error Message 
+ */
 const postWorkspaces = async (name: string="",description: string="") => {
     const url = (new URL("workspaces", Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
@@ -45,8 +51,14 @@ const postWorkspaces = async (name: string="",description: string="") => {
     return respuesta;
 };
 
-// post a new workspace with the specified name and description and (mport from ZIP)
-// @ts-ignore
+
+/**
+ * Creates a new workspace (mport from ZIP)
+ * @param name Name of the new workspace
+ * @param description Description of the new workspace
+ * @param file ZIP file to upload
+ * @returns Success Message with the workspace id and task id of the operation or Error Message 
+ */
  const postWorkspacesImport = async (name: string="",description: string="", file: string="") => {
     const url = (new URL("workspaces", Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
@@ -68,8 +80,12 @@ const postWorkspaces = async (name: string="",description: string="") => {
     return respuesta;
 };
 
-// get the infomation of a workspace by the id
-// @ts-ignore
+
+/**
+ * Gets the information of a workspace
+ * @param id Id of the workspace
+ * @returns The information data of the request workspace
+ */
  const getWorkspaceById = async (id: string) => {
     const url = (new URL("workspace/".concat(id), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
@@ -85,8 +101,16 @@ const postWorkspaces = async (name: string="",description: string="") => {
     return workspace;
 };
 
-// modifies a workspace name and description.
-// @ts-ignore
+
+/**
+ * Modifies a workspace name and description.
+ * @param id Id of the workspace
+ * @param name New name  of the workspace
+ * @param description New name of the workspace
+ * @param disableIndividualAlerts True if individual email notifications are disabled
+ * @param secret Secret for signing JSON web tokens
+ * @returns Success Message or Error Message 
+ */
  const postWorkspaceById = async (id: string,name: string="",description: string="",disableIndividualAlerts: boolean=false,secret: string="") => {
     const url = (new URL("workspace/".concat(id), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
@@ -103,13 +127,16 @@ const postWorkspaces = async (name: string="",description: string="") => {
         })
     })
 
-
     const respuesta: ResultSuccess| ResponseError = await response.json();
     return respuesta;
 };
 
-// delete a workspace by the id 
-// @ts-ignore
+
+/**
+ * Deletes a workspace
+ * @param id Id of the workspace
+ * @returns Success Message or Error Message 
+ */
  const deleteWorkspaceById = async (id: string) => {
     const url = (new URL("workspace/".concat(id), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
@@ -125,8 +152,12 @@ const postWorkspaces = async (name: string="",description: string="") => {
     return respuesta;
 };
 
-// create iframe token for the workspace
-// @ts-ignore
+/**
+ * Creates iframe token for the workspace. Requires a secret to be set.
+ * @param idWorkspace Id of the workspace
+ * @param iframe Iframe token to the workspace
+ * @returns Success Message with the token and url or Error Message
+ */
  const postIframe = async (idWorkspace:string,iframe: Iframe) => {
     const url = (new URL("workspace/".concat(idWorkspace+"/iframe"), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
@@ -141,8 +172,11 @@ const postWorkspaces = async (name: string="",description: string="") => {
     return respuesta;
 }
 
-// s a workspace to a ZIP file
-// @ts-ignore
+/**
+ * Exports a workspace to a ZIP file
+ * @param idWorkspace Id of the workspace
+ * @returns Success Message with task id of the operation or Error Message 
+ */
  const postWorkspace = async (idWorkspace:string) => {
     const url = (new URL("workspace/".concat(idWorkspace+"/"), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {
@@ -156,8 +190,12 @@ const postWorkspaces = async (name: string="",description: string="") => {
     return respuesta;
 }
 
-// Clones a workspace
-// @ts-ignore
+/**
+ * Clones a workspace
+ * @param idWorkspace Id of the workspace
+ * @param name Name of the new workspace
+ * @returns Success Message with the workspace id and task id of the operation or Error Message 
+ */
  const postWorkspaceClone = async (idWorkspace:string,name:string="") => {
     const url = (new URL("workspace/".concat(idWorkspace+"/clone"), Config.getInstance().deepintURL)).toString();
     const response: Response = await fetch(url, {

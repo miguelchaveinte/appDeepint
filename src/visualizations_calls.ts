@@ -3,8 +3,13 @@ import { Config } from "./config";
 import fetch from 'node-fetch';
 import { ResponseError, ResponseErrorSource, ResultSuccess, ResultSuccessSource, Visualization, VisualizationImport, VisualizationResult } from './types';
 
-// Lists the visualizations of a workspace
-// @ts-ignore
+/**
+ * Lists the visualizations of a workspace
+ * @param idWorkspace Id of the workspace
+ * @param page Requested page (starts with 0). Default value 0
+ * @param limit Max number of items per page (max 500) Default value 500
+ * @returns List of the visualization objects
+ */
 const getWorkspaceVisualizations = async (idWorkspace:string,page:number=0,limit:number=500)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/visualizations"), Config.getInstance().deepintURL)).toString()+"?"+ new URLSearchParams({
         page: page+"",
@@ -22,8 +27,12 @@ const getWorkspaceVisualizations = async (idWorkspace:string,page:number=0,limit
     return respuesta;
 }
 
-// Creates a visualization
-// @ts-ignore
+/**
+ * Creates a visualization
+ * @param idWorkspace Id of the workspace
+ * @param visualization Params for the visualization to create
+ * @returns  Success Message with the id of the new visualization or Error Message
+ */
 const postWorkspaceVisualizations = async (idWorkspace:string,visualization:VisualizationImport)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/visualizations"), Config.getInstance().deepintURL)).toString()
 
@@ -39,8 +48,12 @@ const postWorkspaceVisualizations = async (idWorkspace:string,visualization:Visu
     return respuesta;
 }
 
-// Gets visualization data
-// @ts-ignore
+/**
+ * Gets visualization data
+ * @param idWorkspace Id of the workspace
+ * @param idVisualization Id of the visualization to retrieve
+ * @returns Visualization object containing the visualization information or Error Message
+ */
 const getWorkspaceVisualizationById = async (idWorkspace:string,idVisualization:string)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/visualization/"+idVisualization), Config.getInstance().deepintURL)).toString()
 
@@ -55,8 +68,13 @@ const getWorkspaceVisualizationById = async (idWorkspace:string,idVisualization:
     return respuesta;
 }
 
-// Modifies visualization
-// @ts-ignore
+/**
+ * Modifies visualization
+ * @param idWorkspace Id of the workspace
+ * @param idVisualization Id of the visualization to modify
+ * @param visualization Params of visualization to modify
+ * @returns Success Message or Error Message
+ */
 const postWorkspaceVisualizationById = async (idWorkspace:string,idVisualization:string,visualization:VisualizationImport)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/visualization/"+idVisualization), Config.getInstance().deepintURL)).toString()
 
@@ -72,8 +90,12 @@ const postWorkspaceVisualizationById = async (idWorkspace:string,idVisualization
     return respuesta;
 }
 
-// Deletes visualization
-// @ts-ignore
+/**
+ * Deletes visualization
+ * @param idWorkspace Id of the workspace  
+ * @param idVisualization  Id of the visualization to delete
+ * @returns Success Message or Error Message
+ */
 const deleteWorkspaceVisualizationById = async (idWorkspace:string,idVisualization:string)=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/visualization/"+idVisualization), Config.getInstance().deepintURL)).toString()
 
@@ -88,8 +110,13 @@ const deleteWorkspaceVisualizationById = async (idWorkspace:string,idVisualizati
     return respuesta;
 }
 
-// Clones visualization
-// @ts-ignore
+/**
+ * Clones visualization
+ * @param idWorkspace Id of the workspace
+ * @param idVisualization  Id of the visualization to clone
+ * @param name name of the visualization 
+ * @returns Success Message with the id  of the new visualization or Error Message
+ */
 const postCloneVisualizationById = async (idWorkspace:string,idVisualization:string,name:{name:string;})=> {
     let url = (new URL("workspace/".concat(idWorkspace+"/visualization/"+idVisualization+"/clone"), Config.getInstance().deepintURL)).toString()
 

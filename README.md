@@ -9,6 +9,8 @@ Empiece ejecutando `npm install` dentro de la carpeta del proyecto.
 `npm run start` para contruir el proyecto,
 `npm run pre` para correrlo en modo desarrollo.
 
+Para obtener la documentación de las funciones del proyecto: `npx typedoc --out docs` .
+
 ## Configuration
 
 Para llevar a cabo la configuración del módulo, establezca las siguientes variables de entorno:

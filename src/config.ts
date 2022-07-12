@@ -11,6 +11,10 @@ export class Config {
 
     public static instance: Config;
 
+    /**
+     * Return a configuration variable
+     * @returns the instance of the configuration requested
+     */
     public static getInstance() {
         if (Config.instance) {
             return Config.instance;

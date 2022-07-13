@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pre": "tsc && node build/tasks_calls.js && node build/workspaces_calls.js && node build/sources_calls.js && node build/visualizations_calls.js && node build/dashboards_calls.js && node build/models_calls.js",
+    "pre": "tsc && node build/tasks_calls.js && node build/workspaces_calls.js && node build/sources_calls.js && node build/visualizations_calls.js && node build/dashboards_calls.js && node build/models_calls.js && node build/alerts_calls.js && node build/emails_calls.js  && node build/authentication_calls.js",
     "dev": "ts-node-dev src/tasks_calls.ts",
     "start": "node build/tasks_calls.js && node build/workspaces_calls.js",
     "tsc": "tsc",

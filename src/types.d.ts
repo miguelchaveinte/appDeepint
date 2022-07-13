@@ -541,3 +541,129 @@ export interface ModelPredict {
     vary: number;
     values: Array<number>;
 }
+
+
+// TYPES FOR ALERTS CALLS
+
+type ItemAlerts = {
+    id: string;
+    created: string;
+    last_modified: string;
+    name: string;
+    description: string;
+}
+
+export interface Alerts {
+    page: number;
+    limit: number;
+    pages_count: number;
+    items_count: number;
+    items: Array<ItemAlerts>;
+}
+
+export interface AlertsImport {
+    name: string;
+    description: string;
+    color: string;
+    type: string;
+    source: string;
+    condition:QueryTree;
+    time_stall: number;
+}
+
+export type ResultSuccessAlert= ResultSuccess & { alert_id: string; }
+
+export interface AlertResult {
+    id: string;
+    name: string;
+    description: string;
+    created: string;
+    last_modified: string;
+    source: string;
+    color: string;
+    type: string;
+    condition: QueryTree;
+    time_stall: number;
+}
+
+type ItemsInstances = {
+    id: string;
+    alert_type: string;
+    timestamp: string;
+    data:{
+        type: string;
+        title: string;
+        color: string;
+        source:{
+            id: string;
+            name: string;
+        };
+        fields: Array<{
+            name: string;
+            type: string;
+            dateFormat: string;
+        }>;
+        triggers:number;
+        instances: Array<Array<string>>;
+        since:number;
+        span:number;
+    }
+}
+
+export interface AlertsInstances extends Omit<Alerts, "items"> {
+    items: Array<ItemsInstances>;
+}
+
+
+// TYPES FOR EMAILS CALLS
+
+export interface Emails {
+    id:string;
+    email: string;
+    validated: boolean;
+}
+
+export type ResultSuccessEmail= ResultSuccess & { id: string; }
+
+// TYPES FOR ACCOUNT CALLS
+
+export interface Account {
+    user_id: string;
+    user_name: string;
+    user_email: string;
+    token_expiration: string;
+    permissions:{
+        read_workspaces: boolean;
+        write_workspaces: boolean;
+        profile: boolean;
+    };
+    organizations: Array<{
+        id: string;
+        name: string;
+        role: string;
+    }>;
+}
+
+export interface AccountProfile {
+    user_name: string;
+    full_name: string;
+    bio: string;
+    url: string;
+    country: string;
+    picture: string;
+}
+
+export type AccProfileImport = Omit<AccountProfile, ("user_name" | "picture")>
+
+// TYPES FOR AUTHENTICATION CALLS
+
+export interface BearerToken {
+    client_id: string;
+    client_secret: string;
+    bearer: string;
+    expiration: string;
+}
+
+export interface RevokeToken extends Omit<BearerToken, ("bearer" | "expiration")>{
+    auth_token: string;
+}

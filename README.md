@@ -14,6 +14,19 @@ $ npm install api-deepint
 
 ## Usage
 
+#### Example
+
+```js
+const deepint = require('api-deepint');
+deepint.getWorkspaces()
+    .then(workspaces => {
+        console.log(workspaces);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+```
+
 #### Functions
 
 The module contains all API functions with a characteristic function name: 'methodAPI'+'groupAsociated'+'groupFunctions'+'informationFunction'. Eg: get+Workspace+Visualization+ById = getWorkspaceVisualizationById(params);.
@@ -116,8 +129,8 @@ To configure the module, set the following environment variables:
 
 | Variable Name | Description |
 |---|---|
-| X_AUTH_TOKEN |Token Authorization to connect to the API | X_AUTH_TOKEN |Token Authorization to connect to the API |
-| | X_DEEPINT_ORGANIZATION | Organization Token | |
+| X_AUTH_TOKEN |Token Authorization to connect to the API | 
+| X_DEEPINT_ORGANIZATION | Organization Token | 
 | DEEPINT_API_URL | Deep Intelligence API URL, default is `https://app.deepint.net/api/v1/` |
 
 For source configuration, set the following variables:

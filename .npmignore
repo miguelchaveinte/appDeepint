@@ -5,4 +5,4 @@ build/
 pruebas.ts
 docs/
 docs.zip
-dist/
+src/
